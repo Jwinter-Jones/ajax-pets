@@ -1,1 +1,58 @@
-<h1>This will be my AJAX Pet Adoption Agency Assignment!</h1>
+<!doctype html>
+<html>
+<head>
+ 
+   <meta name="robots" content="noindex,nofollow">
+   <title>AJAX Pet Starter</title>
+   <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+   <script type="text/javascript">
+       $("document").ready(function(){
+            $("#pet_likes").hide();
+            $("#pet_eats").hide();
+            $("#pet_feels").hide();
+
+
+           $('#myForm').submit(function(e){
+            let feels = $("input[name=feels] : checked").val();
+            let likes = $("input[name=likes] : checked").val();
+            let eats = $("input[name=eats] : checked").val();
+
+            if(feels == "fluffy" && likes == "petted" && eats == "carrots"){
+            alert("what's up doc!");
+            }
+               alert("hi!  I'm jQuery!");
+              
+               e.preventDefault();//no need to submit as you'll be doing AJAX on this page
+       
+           });
+       });
+   </script>
+</head>
+<body>
+<h2>AJAX Pet Starter</h2>
+<form id="myForm" name="myForm" action="form-handler.php" method="post">
+<p>Below is a starter page for the AJAX Pet Adoption Agency assignment.</p>
+   <div id="pet_feels">
+       <h3>Feels</h3>
+       <p>Please choose how you would like your pet to feel:</p>
+       <input type="radio" name="feels" value="fluffy">fluffy <br />
+       <input type="radio" name="feels" value="scaly">scaly <br />
+   </div>
+   <div id="pet_likes">
+       <h3>Likes</h3>
+       <p>Please tell us what your pet will like:</p>
+       <input type="radio" name="likes" value="petted">to be petted <br />
+       <input type="radio" name="likes" value="ridden">to be ridden <br />
+   </div>
+       <div id="pet_eats">
+       <h3>Eats</h3>
+       <p>Please tell us what your pet likes to eat:</p>
+       <input type="radio" name="eats" value="carrots">carrots <br />
+       <input type="radio" name="eats" value="pets">other people's pets <br />
+   </div>
+  
+   <input type="submit" value="submit it!" />
+   <div id="output">Output goes here!</div>
+</form>
+</body>
+</html>
