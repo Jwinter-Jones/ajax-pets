@@ -7,21 +7,58 @@
    <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
    <script type="text/javascript">
        $("document").ready(function(){
+           
+ 
             $("#pet_likes").hide();
             $("#pet_eats").hide();
-            $("#pet_feels").hide();
+ 
+ 
+            $("#pet_feels").click(function(e){
+                $("#pet_likes").slideDown(200);
+ 
+ 
+            });
+ 
+            $("#pet_likes").click(function(e){
+                $("#pet_eats").slideDown(200);
+ 
+                
+            });
+ 
+        
+            $('#myForm').submit(function(e){
+               //alert("hi!  I'm jQuery!");
+              let feels =  $("input[name=feels]:checked").val();
+              let likes =  $("input[name=likes]:checked").val();
+              let eats =  $("input[name=eats]:checked").val();
+              let pet = "rabbit";
+            
+ 
+            
+              if(feels=="fluffy" && likes=="petted" && eats == "carrots" ){
+                pet = "rabbit";
+              }
+ 
+              if(feels=="scaly" && likes=="ridden" && eats == "pets" ){
+                pet = "velociraptor";
+              }
 
-
-           $('#myForm').submit(function(e){
-            let feels = $("input[name=feels] : checked").val();
-            let likes = $("input[name=likes] : checked").val();
-            let eats = $("input[name=eats] : checked").val();
-
-            if(feels == "fluffy" && likes == "petted" && eats == "carrots"){
-            alert("what's up doc!");
-            }
-               alert("hi!  I'm jQuery!");
-              
+              if(feels=="soft" && likes=="walked" && eats == "cake" ){
+                pet = "unicorn";
+              }
+ 
+ 
+ 
+              let output = "";
+              output += `<p>My pet is: ${pet}</P>`;
+              output += `<p>My pet feels: ${feels}</P>`;
+              output += `<p>My pet likes to be:  ${likes}</P>`;
+              output += `<p>My pet likes to eat:  ${eats}</P>`;
+ 
+                $("#pet").load('include/content.html #' + pet).appendTo("#pet");
+ 
+                $("#output").html(output).appendTo("#output");
+              //alert(feels);
                e.preventDefault();//no need to submit as you'll be doing AJAX on this page
        
            });
@@ -30,28 +67,32 @@
 </head>
 <body>
 <h2>AJAX Pet Starter</h2>
-<form id="myForm" name="myForm" action="form-handler.php" method="post">
+<form id="myForm" name="myForm" action="include/critter_handler.php" method="post">
 <p>Below is a starter page for the AJAX Pet Adoption Agency assignment.</p>
    <div id="pet_feels">
        <h3>Feels</h3>
        <p>Please choose how you would like your pet to feel:</p>
-       <input type="radio" name="feels" value="fluffy">fluffy <br />
+       <input type="radio" name="feels" value="fluffy" required="required">fluffy <br />
        <input type="radio" name="feels" value="scaly">scaly <br />
+       <input type="radio" name="feels" value="soft">soft <br />
    </div>
    <div id="pet_likes">
        <h3>Likes</h3>
        <p>Please tell us what your pet will like:</p>
-       <input type="radio" name="likes" value="petted">to be petted <br />
+       <input type="radio" name="likes" value="petted" required="required">to be petted <br />
        <input type="radio" name="likes" value="ridden">to be ridden <br />
+       <input type="radio" name="likes" value="walked">to be walked <br />
    </div>
        <div id="pet_eats">
        <h3>Eats</h3>
        <p>Please tell us what your pet likes to eat:</p>
-       <input type="radio" name="eats" value="carrots">carrots <br />
+       <input type="radio" name="eats" value="carrots" required="required">carrots <br />
        <input type="radio" name="eats" value="pets">other people's pets <br />
+       <input type="radio" name="eats" value="cake">cake <br />
    </div>
   
    <input type="submit" value="submit it!" />
+   <div id="pet">Pet pic goes here!</div>
    <div id="output">Output goes here!</div>
 </form>
 </body>
